@@ -59,6 +59,12 @@
   text-align: center;
 }
 
+.success-message {
+  color: #4f86d9;
+  margin-top: 10px;
+  text-align: center;
+}
+
 .edit-save-container {
   display: flex;
   align-items: center;

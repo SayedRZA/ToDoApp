@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { InputText } from 'primereact/inputtext';
 import { Button } from 'primereact/button';
 import { Dropdown } from 'primereact/dropdown';
+import { Toast } from 'primereact/toast';
 
 const ToDoList = () => {
     const [tasks, setTasks] = useState([
@@ -9,10 +10,10 @@ const ToDoList = () => {
         { text: 'orange', priority: 'Medium' }
     ]);
     const [selectPriority, setSelectPriority] = useState('Low');
-    const [errorMessage, setErrorMessage] = useState('');
     const [isEditing, setIsEditing] = useState(false);
     const [currentTaskIndex, setCurrentTaskIndex] = useState(null);
     const [editValue, setEditValue] = useState('');
+    const toast = useRef(null)
 
     const priorityOptions = [
         { label: 'Low', value: 'Low' },
@@ -23,16 +24,15 @@ const ToDoList = () => {
     const handleAddTask = () => {
         const moreItem = document.getElementById('item-id').value.trim();
         if (moreItem === '') {
-            setErrorMessage('Task cannot be empty!');
-            setTimeout(() => setErrorMessage(''), 3000);
+            toast.current.show({ severity: 'error', summary: 'Opps!', detail: 'Value cannot be empty' });
             return;
         }
         if (tasks.some(task => task.text === moreItem)) {
-            setErrorMessage('Task already exists');
-            setTimeout(() => setErrorMessage(''), 3000);
+            toast.current.show({ severity: 'warn', summary: 'Try again!', detail: 'Task already exist' });
             return;
         }
         document.getElementById('item-id').value = '';
+        toast.current.show({ severity: 'success', summary: 'Great!', detail: 'Task was created successfully' });
         setTasks([...tasks, { text: moreItem, priority: selectPriority }]);
         setSelectPriority('Low');
     };
@@ -71,7 +71,7 @@ const ToDoList = () => {
                 />
                 <Button onClick={handleAddTask} label="Add Task" icon="pi pi-check" iconPos="right" />
             </div>
-            {errorMessage && <div className="error-message">{errorMessage}</div>}
+            <Toast ref={toast} />
             <div className="task-list-container">
                 <ul className="task-list">
                     {tasks.map((item, index) => (
