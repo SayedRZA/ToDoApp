@@ -3,6 +3,7 @@ import { InputText } from 'primereact/inputtext';
 import { Button } from 'primereact/button';
 import { Dropdown } from 'primereact/dropdown';
 import { Toast } from 'primereact/toast';
+import NavMenu from "./NavMenu";
 
 const ToDoList = () => {
     const [tasks, setTasks] = useState([
@@ -58,7 +59,9 @@ const ToDoList = () => {
     };
 
     return (
-        <div className="todo-container">
+        <div >
+        <NavMenu />
+        <div className="todo-container" >
             <div className="toDoInput">
                 <h1>TO DO LIST</h1>
                 <InputText type="text" placeholder="Enter Task" id="item-id" className="input-text" />
@@ -71,6 +74,9 @@ const ToDoList = () => {
                 />
                 <Button onClick={handleAddTask} label="Add Task" icon="pi pi-check" iconPos="right" />
             </div>
+            </div>
+
+            <div className="todo-container">
             <Toast ref={toast} />
             <div className="task-list-container">
                 <ul className="task-list">
@@ -113,6 +119,7 @@ const ToDoList = () => {
                         </li>
                     ))}
                 </ul>
+            </div>
             </div>
         </div>
     );
