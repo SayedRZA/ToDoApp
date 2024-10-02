@@ -4,6 +4,7 @@ import { Button } from 'primereact/button';
 import { Dropdown } from 'primereact/dropdown';
 import { Toast } from 'primereact/toast';
 import NavMenu from "./NavMenu";
+import NewsBanner from "./NewsBanner";
 
 const ToDoList = () => {
     const [tasks, setTasks] = useState([
@@ -61,6 +62,7 @@ const ToDoList = () => {
     return (
         <div >
         <NavMenu />
+      <NewsBanner />
         <div className="todo-container" >
             <div className="toDoInput">
                 <h1>TO DO LIST</h1>

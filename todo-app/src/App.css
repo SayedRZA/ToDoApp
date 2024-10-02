@@ -1,5 +1,7 @@
 /* ToDoList.css */
+@import url('https://fonts.googleapis.com/css2?family=Orbitron&display=swap');
 .todo-container {
+  flex: 1;
   max-width: 400px;
   margin: 20px auto;
   padding: 20px;
@@ -8,6 +10,10 @@
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
   font-family: Arial, sans-serif;
 }
+.container {
+  display: flex; 
+}
+
 
 .toDoInput {
   display: flex;
@@ -69,11 +75,11 @@
   display: flex;
   align-items: center;
   width: 100%;
-  max-width: 100%; /* Prevent overflow */
+  max-width: 100%;
 }
 
 .edit-input, .priority-dropdown {
-  width: 100px; /* Set fixed width for inputs */
+  width: 100px;
   margin-right: 10px;
 }
 
@@ -116,5 +122,44 @@
   -webkit-backdrop-filter: blur(10px);
   border-radius: 10px; 
   padding: 10px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2); /* Optional: adds shadow */
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2); 
+}
+.clock-container {
+  width: 200px; 
+  height: 80px; 
+  display: flex; 
+  margin: 10px;
+  align-items: center; 
+  justify-content: center; 
+  border: 1px solid #333; 
+  border-radius: 15px; 
+  background-color: #ffffff; 
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); 
+  font-family: 'Orbitron', sans-serif;
+  font-size: 1.5em; 
+  font-weight: 800;
+  color: #333; 
+}
+
+.news-banner {
+  overflow: hidden; /* Hide overflow */
+  background: rgb(34,193,195);
+  background: linear-gradient(0deg, rgba(34, 192, 195, 0.247) 0%, rgba(253, 187, 45, 0.281) 100%);
+  white-space: nowrap; /* Prevent wrapping of content */
+  position: relative; /* Keep it relative for positioning */
+  width: 100%; /* Full width */
+}
+
+.news-content {
+  display: inline-block; /* Allow inline content to scroll */
+  animation: scroll 23s linear infinite; /* Adjust duration as needed */
+}
+
+@keyframes scroll {
+  0% {
+      transform: translateX(610%); /* Start off-screen on the right */
+  }
+  100% {
+      transform: translateX(-100%); /* Move to the left edge */
+  }
 }
