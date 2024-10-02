@@ -3,10 +3,10 @@ import { Menubar } from 'primereact/menubar';
 import { InputText } from 'primereact/inputtext';
 import { Badge } from 'primereact/badge';
 import { Avatar } from 'primereact/avatar';  
+import { Link } from "react-router-dom";
 
 
 const NavMenu = () => {
-
     const itemRenderer = (item) => (
         <a className="flex align-items-center p-menuitem-link">
             <span className={item.icon} />
@@ -15,10 +15,17 @@ const NavMenu = () => {
             {item.shortcut && <span className="ml-auto border-1 surface-border border-round surface-100 text-xs p-1">{item.shortcut}</span>}
         </a>
     );
+
     const items = [
         {
             label: 'Completed',
-            icon: 'pi pi-check'
+            icon: 'pi pi-check',
+            template: (item) => (
+                <Link to="/completed" className="flex align-items-center p-menuitem-link">
+                    <span className={item.icon} />
+                    <span className="mx-2">{item.label}</span>
+                </Link>
+            )
         },
         {
             label: 'Uncompleted',
@@ -28,45 +35,7 @@ const NavMenu = () => {
             label: 'Projects',
             icon: 'pi pi-search',
             items: [
-                {
-                    label: 'Core',
-                    icon: 'pi pi-bolt',
-                    shortcut: '⌘+S',
-                    template: itemRenderer
-                },
-                {
-                    label: 'Blocks',
-                    icon: 'pi pi-server',
-                    shortcut: '⌘+B',
-                    template: itemRenderer
-                },
-                {
-                    label: 'UI Kit',
-                    icon: 'pi pi-pencil',
-                    shortcut: '⌘+U',
-                    template: itemRenderer
-                },
-                {
-                    separator: true
-                },
-                {
-                    label: 'Templates',
-                    icon: 'pi pi-palette',
-                    items: [
-                        {
-                            label: 'Apollo',
-                            icon: 'pi pi-palette',
-                            badge: 2,
-                            template: itemRenderer
-                        },
-                        {
-                            label: 'Ultima',
-                            icon: 'pi pi-palette',
-                            badge: 3,
-                            template: itemRenderer
-                        }
-                    ]
-                }
+                // ... your project items
             ]
         },
         {
@@ -77,7 +46,7 @@ const NavMenu = () => {
         }
     ];
 
-    const start = <img alt="logo" src="https://static.vecteezy.com/system/resources/previews/025/638/355/original/simple-task-icon-the-icon-can-be-used-for-websites-print-templates-presentation-templates-illustrations-etc-free-vector.jpg" height="40" className="mr-2"></img>;
+    const start = <img alt="logo" src="https://static.vecteezy.com/system/resources/previews/025/638/355/original/simple-task-icon-the-icon-can-be-used-for-websites-print-templates-presentation-templates-illustrations-etc-free-vector.jpg" height="40" className="mr-2" />;
     const end = (
         <div className="flex align-items-center gap-2">
             <InputText placeholder="Search" type="text" className="w-8rem sm:w-auto" />
@@ -85,11 +54,11 @@ const NavMenu = () => {
         </div>
     );
 
-    return(
+    return (
         <div className="card">
             <Menubar className="menubar" model={items} start={start} end={end} />
         </div>
-    )
+    );
 }
 
 export default NavMenu;
