@@ -1,14 +1,17 @@
 /* ToDoList.css */
 @import url('https://fonts.googleapis.com/css2?family=Orbitron&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
 .todo-container {
   flex: 1;
-  max-width: 400px;
+  max-width: 600px;
   margin: 20px auto;
   padding: 20px;
   background-color: #ffffff;
   border-radius: 10px;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
   font-family: Arial, sans-serif;
+  
 }
 .container {
   display: flex; 
@@ -79,7 +82,7 @@
 }
 
 .edit-input, .priority-dropdown {
-  width: 100px;
+  width: 220px;
   margin-right: 10px;
 }
 
@@ -114,6 +117,7 @@
   display: flex;
   justify-content: space-between;
   width: 100%;
+  align-items: center;
 }
 
 .menubar {
@@ -171,3 +175,81 @@
       transform: translateX(-100%); 
   }
 }
+
+.low-priority {
+  background: linear-gradient(to right, #d4edda 0%, #78e478 100%);
+  color: #000000; 
+  font: 1.2em 'Roboto', sans-serif;
+  position: relative; /* For positioning the pseudo-element */
+  overflow: hidden; /* To hide overflow from the pseudo-element */
+}
+
+.medium-priority {
+  background: linear-gradient(to right, #ffeeba 0%, #ffd54f 100%);
+  color: #000000;
+  font: 1.2em 'Roboto', sans-serif;
+  position: relative;
+  overflow: hidden;
+}
+
+.high-priority {
+  background: linear-gradient(to right, #f8d7da 0%, #f398a1 100%);
+  color: #000000; 
+  font: 1.2em 'Roboto', sans-serif;
+  position: relative;
+  overflow: hidden;
+}
+
+.task-item {
+  padding: 10px;
+  margin: 5px 0;
+  border-radius: 5px;
+}
+
+.empty-message {
+  text-align: center;
+  margin-top: 20px;
+  color: #888; 
+}
+
+.completed-tasks {
+  margin-top: 20px;
+}
+
+.completed-tasks h2 {
+  margin-bottom: 10px;
+}
+
+.completed-tasks ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.completed-tasks-container {
+  flex: 1;
+  max-width: 600px;
+  margin: 20px auto;
+  padding: 20px;
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  font-family: Arial, sans-serif;
+}
+
+.completed-task-item {
+  background-color: #eefdff;
+  color: #333; 
+  padding: 10px;
+  margin: 5px 0;
+  border-radius: 5px;
+  font: 1.2em 'Roboto', sans-serif;
+  white-space: nowrap; 
+  overflow: hidden; 
+  text-overflow: ellipsis; 
+}
+
+.task-list {
+  list-style-type: none;
+  padding: 0;
+}
+

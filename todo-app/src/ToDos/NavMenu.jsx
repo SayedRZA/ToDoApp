@@ -2,34 +2,23 @@ import React from "react";
 import { Menubar } from 'primereact/menubar';
 import { InputText } from 'primereact/inputtext';
 import { Badge } from 'primereact/badge';
-import { Avatar } from 'primereact/avatar';  
-import { Link } from "react-router-dom";
+import { Avatar } from 'primereact/avatar';
 
-
-const NavMenu = () => {
-    const itemRenderer = (item) => (
-        <a className="flex align-items-center p-menuitem-link">
-            <span className={item.icon} />
-            <span className="mx-2">{item.label}</span>
-            {item.badge && <Badge className="ml-auto" value={item.badge} />}
-            {item.shortcut && <span className="ml-auto border-1 surface-border border-round surface-100 text-xs p-1">{item.shortcut}</span>}
-        </a>
-    );
-
+const NavMenu = ({ onMenuItemClick }) => {
     const items = [
         {
+            label: 'Task Builder',
+            icon: 'pi pi-user-edit',
+            command: () => onMenuItemClick('uncompleted'), 
+        },
+        {
             label: 'Completed',
-            icon: 'pi pi-check',
-            template: (item) => (
-                <Link to="/completed" className="flex align-items-center p-menuitem-link">
-                    <span className={item.icon} />
-                    <span className="mx-2">{item.label}</span>
-                </Link>
-            )
+            icon: 'pi pi-check-circle',
+            command: () => onMenuItemClick('completed'), 
         },
         {
             label: 'Uncompleted',
-            icon: 'pi pi-flag'
+            icon: 'pi pi-flag',
         },
         {
             label: 'Projects',
@@ -42,11 +31,18 @@ const NavMenu = () => {
             label: 'Contact',
             icon: 'pi pi-envelope',
             badge: 3,
-            template: itemRenderer
         }
     ];
 
-    const start = <img alt="logo" src="https://static.vecteezy.com/system/resources/previews/025/638/355/original/simple-task-icon-the-icon-can-be-used-for-websites-print-templates-presentation-templates-illustrations-etc-free-vector.jpg" height="40" className="mr-2" />;
+    const start = (
+        <img
+            alt="logo"
+            src="https://static.vecteezy.com/system/resources/previews/025/638/355/original/simple-task-icon-the-icon-can-be-used-for-websites-print-templates-presentation-templates-illustrations-etc-free-vector.jpg"
+            height="40"
+            className="mr-2"
+        />
+    );
+
     const end = (
         <div className="flex align-items-center gap-2">
             <InputText placeholder="Search" type="text" className="w-8rem sm:w-auto" />

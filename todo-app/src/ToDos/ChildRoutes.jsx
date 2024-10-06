@@ -1,16 +1,18 @@
-import React from 'react';
-// import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import React, { useState } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import ToDoList from './ToDoList';
+import CompletedTasks from './CompletedTasks';
 import NavMenu from './NavMenu';
-import CompletedTasksInfo from './CompletedTasksInfo';
 
 const App = () => {
+    const [completedTasks, setCompletedTasks] = useState([]);
+
     return (
         <Router>
             <NavMenu />
             <Routes>
-                <Route path="/completed" element={<CompletedTasksInfo />} />
-                {/* Add other routes here */}
+                <Route path="/" element={<ToDoList setCompletedTasks={setCompletedTasks} />} />
+                <Route path="/completed" element={<CompletedTasks completedTasks={completedTasks} />} />
             </Routes>
         </Router>
     );
