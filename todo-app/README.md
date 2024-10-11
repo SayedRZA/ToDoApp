@@ -16,7 +16,17 @@ This is a simple and intuitive To-Do List application built with React. Users ca
 ### Completed Tasks
 ![alt text](image-1.png) <!-- Placeholder for completed tasks screenshot -->
 
+### Tasks & Priorities 
+![alt text](image-2.png) <!-- Placeholder for completed tasks screenshot -->
+
+### Edit tasks
+![alt text](image-4.png) <!-- Placeholder for completed tasks screenshot -->
+
+### Completed tasks section
+![alt text](image-5.png) <!-- Placeholder for completed tasks screenshot -->
+
 ## Installation
 1. Clone the repository:
    ```bash
    git clone https://github.com/SayedRZA/ToDoApp.git
+

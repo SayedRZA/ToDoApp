@@ -4,7 +4,7 @@ import { Button } from 'primereact/button';
 import { Dropdown } from 'primereact/dropdown';
 import { Toast } from 'primereact/toast';
 import NavMenu from "./NavMenu";
-import CompletedTasks from "./CompletedTasks"; // Import the new component
+import CompletedTasks from "./CompletedTasks";
 
 const ToDoList = () => {
     const [tasks, setTasks] = useState([]);
@@ -13,7 +13,7 @@ const ToDoList = () => {
     const [isEditing, setIsEditing] = useState(false);
     const [currentTaskIndex, setCurrentTaskIndex] = useState(null);
     const [editValue, setEditValue] = useState('');
-    const [view, setView] = useState('uncompleted'); // New state to track the view
+    const [view, setView] = useState('uncompleted'); 
     const toast = useRef(null);
 
     const priorityOptions = [
@@ -68,7 +68,7 @@ const ToDoList = () => {
     };
 
     const handleMenuItemClick = (newView) => {
-        setView(newView); // Update the view based on the menu item clicked
+        setView(newView);
     };
 
     const handleDeleteCompletedTask = (index) => {
