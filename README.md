@@ -11,19 +11,16 @@ This is a simple and intuitive To-Do List application built with React. Users ca
 
 ## Screenshots
 ### Main Page
-![alt text](image.png) <!-- Placeholder for main page screenshot -->
+![image](https://github.com/user-attachments/assets/fd3eded7-8703-456d-a031-ed45e40e6a46)
 
 ### Completed Tasks
-![alt text](image-1.png) <!-- Placeholder for completed tasks screenshot -->
+![image](https://github.com/user-attachments/assets/ae91e46c-2f23-4b12-8bf6-ce18d8da7651)
 
 ### Tasks & Priorities 
-![alt text](image-2.png) <!-- Placeholder for completed tasks screenshot -->
+![image](https://github.com/user-attachments/assets/05956b27-3e28-4688-9650-1618f832f655)
 
 ### Edit tasks
-![alt text](image-4.png) <!-- Placeholder for completed tasks screenshot -->
-
-### Completed tasks section
-![alt text](image-5.png) <!-- Placeholder for completed tasks screenshot -->
+![image](https://github.com/user-attachments/assets/9a555032-3489-445a-8714-cf452fb085ac)
 
 ## Installation
 1. Clone the repository:
