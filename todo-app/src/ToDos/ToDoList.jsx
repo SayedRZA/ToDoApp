@@ -5,6 +5,7 @@ import { Dropdown } from 'primereact/dropdown';
 import { Toast } from 'primereact/toast';
 import NavMenu from "./NavMenu";
 import CompletedTasks from "./CompletedTasks";
+import DragTasks from "./DragTasks";
 
 const ToDoList = () => {
     const [tasks, setTasks] = useState([]);
@@ -13,7 +14,8 @@ const ToDoList = () => {
     const [isEditing, setIsEditing] = useState(false);
     const [currentTaskIndex, setCurrentTaskIndex] = useState(null);
     const [editValue, setEditValue] = useState('');
-    const [view, setView] = useState('uncompleted'); 
+    const [view, setView] = useState('uncompleted');
+    const [droppedTasks, setDroppedTasks] = useState(Array(16).fill(null)); // 16 slots for dropped tasks
     const toast = useRef(null);
 
     const priorityOptions = [
@@ -75,11 +77,25 @@ const ToDoList = () => {
         setCompletedTasks(completedTasks.filter((_, i) => i !== index));
     };
 
-    return (
-        <div>
-            <NavMenu onMenuItemClick={handleMenuItemClick} />
-            {view === 'uncompleted' ? (
-                <>
+
+    const handleDrop = (index) => (e) => {
+        const taskIndex = e.dataTransfer.getData('text/plain');
+        const taskToDrop = tasks[taskIndex];
+
+        if (droppedTasks[index] === null) {
+            const newDroppedTasks = [...droppedTasks];
+            newDroppedTasks[index] = taskToDrop;
+            setDroppedTasks(newDroppedTasks);
+            handleDeleteTask(taskIndex); // Remove task from original list
+            toast.current.show({ severity: 'success', summary: 'Task Dropped', detail: `Task ${taskToDrop.text} added to slot ${index + 1}` });
+        } else {
+            toast.current.show({ severity: 'warn', summary: 'Slot Occupied', detail: `Slot ${index + 1} is already occupied` });
+        }
+    };
+
+
+    const renderUncompletedTasks = () => (
+        <>
             <div className="todo-container">
                 <div className="toDoInput">
                     <h1>TO DO LIST</h1>
@@ -97,73 +113,80 @@ const ToDoList = () => {
 
             <div className="todo-container">
                 <Toast ref={toast} />
-
-                    <>
-                        {tasks.length === 0 ? (
-                            <div className="empty-message">
-                                <h3>Create a task above</h3>
-                            </div>
-                        ) : (
-                            <ul className="task-list">
-                                {tasks.map((item, index) => (
-                                    <li className={`task-item ${item.priority.toLowerCase() + '-priority'}`} key={index}>
-                                        {isEditing && currentTaskIndex === index ? (
-                                            <div className="edit-save-container">
-                                                <InputText
-                                                    value={editValue}
-                                                    onChange={(e) => setEditValue(e.target.value)}
-                                                    className="edit-input"
-                                                />
-                                                <Dropdown
-                                                    value={selectPriority}
-                                                    options={priorityOptions}
-                                                    onChange={(e) => setSelectPriority(e.value)}
-                                                    className="priority-dropdown"
-                                                />
-                                                <Button label="Save" severity="secondary" raised  onClick={() => handleSaveTask(index)} />
-                                            </div>
-                                        ) : (
-                                            <div className="task-display-container">
-                                                <span style={{ width: '150px', display: 'inline-block' }}>
-                                                    {item.text} ({item.priority})
-                                                </span>
-                                                <div className="task-buttons">
-                                                    <Button
-                                                        style={{ backgroundColor: 'var(--surface-500)', color: 'var(--primary-color-text)' }}
-                                                        icon="pi pi-check"
-                                                        className="complete-button"
-                                                        onClick={() => handleCompleteTask(index)}
-                                                        aria-label="Complete"
-                                                    />
-                                                    <Button
-                                                        style={{ backgroundColor: 'var(--surface-500)', color: 'var(--primary-color-text)' }}
-                                                        icon="pi pi-pencil"
-                                                        className="edit-button"
-                                                        onClick={() => handleEditTask(index, item)}
-                                                        aria-label="Edit"
-                                                    />
-                                                    <Button
-                                                        style={{ backgroundColor: 'var(--surface-500)', color: 'var(--primary-color-text)' }}
-                                                        icon="pi pi-times"
-                                                        className="delete-button"
-                                                        onClick={() => handleDeleteTask(index)}
-                                                        aria-label="Delete"
-                                                    />
-                                                </div>
-                                            </div>
-                                        )}
-                                    </li>
-                                ))}
-                            </ul>
-                        )}
-                    </>
+                {tasks.length === 0 ? (
+                    <div className="empty-message">
+                        <h3>Create a task above</h3>
+                    </div>
+                ) : (
+                    <ul className="task-list">
+                        {tasks.map((item, index) => (
+                            <li
+                                className={`task-item ${item.priority.toLowerCase() + '-priority'}`}
+                                key={index}
+                                draggable
+                                onDragStart={(e) => e.dataTransfer.setData('text/plain', index)}
+                                style={{ margin: '5px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}
+                            >
+                                {isEditing && currentTaskIndex === index ? (
+                                    <div className="edit-save-container">
+                                        <InputText
+                                            value={editValue}
+                                            onChange={(e) => setEditValue(e.target.value)}
+                                            className="edit-input"
+                                        />
+                                        <Dropdown
+                                            value={selectPriority}
+                                            options={priorityOptions}
+                                            onChange={(e) => setSelectPriority(e.value)}
+                                            className="priority-dropdown"
+                                        />
+                                        <Button label="Save" severity="secondary" raised onClick={() => handleSaveTask(index)} />
+                                    </div>
+                                ) : (
+                                    <div className="task-display-container" style={{ flexGrow: 1 }}>
+                                        <span style={{ width: '150px', display: 'inline-block' }}>
+                                            {item.text} ({item.priority})
+                                        </span>
+                                        <div className="task-buttons">
+                                            <Button
+                                                style={{ backgroundColor: 'var(--surface-500)', color: 'var(--primary-color-text)' }}
+                                                icon="pi pi-check"
+                                                className="complete-button"
+                                                onClick={() => handleCompleteTask(index)}
+                                                aria-label="Complete"
+                                            />
+                                            <Button
+                                                style={{ backgroundColor: 'var(--surface-500)', color: 'var(--primary-color-text)' }}
+                                                icon="pi pi-pencil"
+                                                className="edit-button"
+                                                onClick={() => handleEditTask(index, item)}
+                                                aria-label="Edit"
+                                            />
+                                            <Button
+                                                style={{ backgroundColor: 'var(--surface-500)', color: 'var(--primary-color-text)' }}
+                                                icon="pi pi-times"
+                                                className="delete-button"
+                                                onClick={() => handleDeleteTask(index)}
+                                                aria-label="Delete"
+                                            />
+                                        </div>
+                                    </div>
+                                )}
+                            </li>
+                        ))}
+                    </ul>
+                )}
             </div>
-            </>
-              ) : (
-                <CompletedTasks completedTasks={completedTasks} onDeleteTask={handleDeleteCompletedTask} />
-            )}
+        </>
+    );
+
+    return (
+        <div>
+            <NavMenu onMenuItemClick={handleMenuItemClick} />
+            {view === 'uncompleted' && renderUncompletedTasks()}
+            {view === 'completed' && <CompletedTasks completedTasks={completedTasks} onDeleteTask={handleDeleteCompletedTask} />}
+            {view === 'dragTask' && <DragTasks />}
         </div>
     );
-}
-
+};
 export default ToDoList;
