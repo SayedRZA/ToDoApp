@@ -1,7 +1,6 @@
 import React from "react";
 import { Menubar } from 'primereact/menubar';
 import { InputText } from 'primereact/inputtext';
-import { Badge } from 'primereact/badge';
 import { Avatar } from 'primereact/avatar';
 
 const NavMenu = ({ onMenuItemClick }) => {
@@ -19,6 +18,7 @@ const NavMenu = ({ onMenuItemClick }) => {
         {
             label: 'Uncompleted',
             icon: 'pi pi-flag',
+            command: () => onMenuItemClick('dragTask'), 
         },
         {
             label: 'Projects',

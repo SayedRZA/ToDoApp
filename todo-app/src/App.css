@@ -3,6 +3,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
 
 .todo-container {
+
   flex: 1;
   max-width: 600px;
   margin: 20px auto;
@@ -180,8 +181,8 @@
   background: linear-gradient(to right, #d4edda 0%, #78e478 100%);
   color: #000000; 
   font: 1.2em 'Roboto', sans-serif;
-  position: relative; /* For positioning the pseudo-element */
-  overflow: hidden; /* To hide overflow from the pseudo-element */
+  position: relative; 
+  overflow: hidden; 
 }
 
 .medium-priority {

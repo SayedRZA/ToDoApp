@@ -1,0 +1,55 @@
+.clock-widget {
+    width: 120px; 
+    height: 120px;
+    background-color: #1976D2;
+    border-radius: 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 5px 0px 10px rgba(0, 0, 0, 0.507);
+    margin-top: 65px;
+    transition: transform 0.3s;
+}
+.clock-widget:hover {
+    transform: scale(1.05); 
+    background-color: #185a9c;
+}
+
+.clock-face {
+    width: 100px;
+    height: 100px; 
+    background-color: rgba(255, 255, 255, 0.24); 
+    border-radius: 50%; 
+    position: relative; 
+}
+
+.hour-hand, .minute-hand, .second-hand {
+    position: absolute;
+    background-color: rgb(255, 255, 255);
+    border-radius: 5px;
+    transform-origin: bottom center;
+}
+
+.hour-hand {
+    width: 6px;
+    height: 30px;
+    bottom: 50%;
+    left: 50%;
+    transform: translateX(-50%) rotate(0deg);
+}
+
+.minute-hand {
+    width: 4px;
+    height: 40px;
+    bottom: 50%;
+    left: 50%;
+    transform: translateX(-50%) rotate(0deg);
+}
+
+.second-hand {
+    width: 2px;
+    height: 45px;
+    bottom: 50%;
+    left: 50%;
+    transform: translateX(-50%) rotate(0deg);
+}
