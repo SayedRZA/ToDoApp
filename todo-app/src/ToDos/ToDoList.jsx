@@ -6,6 +6,11 @@ import { Toast } from 'primereact/toast';
 import NavMenu from "./NavMenu";
 import CompletedTasks from "./CompletedTasks";
 import DragTasks from "./DragTasks";
+import TimerZone from "./TimerZone";
+import DateWidget from "./DateWidget";
+import NoteWidget from "./NoteWidget";
+import BMICalculator from "./BMICalculator";
+import QuoteGenerator from "./QuoteGenerator";
 
 const ToDoList = () => {
     const [tasks, setTasks] = useState([]);
@@ -96,6 +101,19 @@ const ToDoList = () => {
 
     const renderUncompletedTasks = () => (
         <>
+
+            <div style={{ position: 'fixed', top: '30px', left: '20px' }}>
+                <TimerZone />
+                <BMICalculator />
+            </div>
+            <div style={{ position: 'fixed', top: '160px', left: '20px' }}>
+                <DateWidget />
+                <NoteWidget />
+            </div>
+            <div style={{ position: 'fixed', top: '346px', left: '20px' }}>
+                <QuoteGenerator />
+            </div>
+
             <div className="todo-container">
                 <div className="toDoInput">
                     <h1>TO DO LIST</h1>

@@ -1,0 +1,22 @@
+.quote {
+    font-style: italic;
+    font-size: 1rem;
+    color: #ffffff;
+}
+
+.generate-button {
+    background-color: #4DB6B4;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    border-radius: 12px;
+    width: 248px;
+    transition: transform 0.3s;
+}
+
+.generate-button:hover {
+    transform: scale(1.05);
+    background-color: #00796B;
+}

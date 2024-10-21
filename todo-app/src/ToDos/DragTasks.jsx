@@ -16,7 +16,7 @@ const DragTasks = () => {
     const [currentTaskIndex, setCurrentTaskIndex] = useState(null);
     const [editValue, setEditValue] = useState('');
     const [view, setView] = useState('uncompleted');
-    const [droppedTasks, setDroppedTasks] = useState(Array(16).fill(null)); // 16 slots for dropped tasks
+    const [droppedTasks, setDroppedTasks] = useState(Array(16).fill(null)); 
     const toast = useRef(null);
 
     const priorityOptions = [
