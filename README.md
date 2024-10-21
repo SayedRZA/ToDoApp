@@ -22,6 +22,17 @@ This is a simple and intuitive To-Do List application built with React. Users ca
 ### Edit tasks
 ![image](https://github.com/user-attachments/assets/9a555032-3489-445a-8714-cf452fb085ac)
 
+### Tool Tips / Widgets 
+![image](https://github.com/user-attachments/assets/77d1ebaf-37e6-4be9-8a62-b8655e9cff7e)
+![image](https://github.com/user-attachments/assets/3b9a8ba6-9d2d-468f-92a8-86bb49691e56)
+![image](https://github.com/user-attachments/assets/47cde395-97e8-48f9-92f3-d09d43227ac2)
+![image](https://github.com/user-attachments/assets/fcc0a85b-8a7c-44f3-8af5-64fa12bf5704)
+
+
+
+
+
+
 ## Installation
 1. Clone the repository:
    ```bash
