@@ -11,6 +11,7 @@ import DateWidget from "./DateWidget";
 import NoteWidget from "./NoteWidget";
 import BMICalculator from "./BMICalculator";
 import QuoteGenerator from "./QuoteGenerator";
+import DoughnutChart from "./DoughnutChart";
 
 const ToDoList = () => {
     const [tasks, setTasks] = useState([]);
@@ -20,7 +21,6 @@ const ToDoList = () => {
     const [currentTaskIndex, setCurrentTaskIndex] = useState(null);
     const [editValue, setEditValue] = useState('');
     const [view, setView] = useState('uncompleted');
-    const [droppedTasks, setDroppedTasks] = useState(Array(16).fill(null)); // 16 slots for dropped tasks
     const toast = useRef(null);
 
     const priorityOptions = [
@@ -82,23 +82,6 @@ const ToDoList = () => {
         setCompletedTasks(completedTasks.filter((_, i) => i !== index));
     };
 
-
-    const handleDrop = (index) => (e) => {
-        const taskIndex = e.dataTransfer.getData('text/plain');
-        const taskToDrop = tasks[taskIndex];
-
-        if (droppedTasks[index] === null) {
-            const newDroppedTasks = [...droppedTasks];
-            newDroppedTasks[index] = taskToDrop;
-            setDroppedTasks(newDroppedTasks);
-            handleDeleteTask(taskIndex); // Remove task from original list
-            toast.current.show({ severity: 'success', summary: 'Task Dropped', detail: `Task ${taskToDrop.text} added to slot ${index + 1}` });
-        } else {
-            toast.current.show({ severity: 'warn', summary: 'Slot Occupied', detail: `Slot ${index + 1} is already occupied` });
-        }
-    };
-
-
     const renderUncompletedTasks = () => (
         <>
 
@@ -112,6 +95,9 @@ const ToDoList = () => {
             </div>
             <div style={{ position: 'fixed', top: '346px', left: '20px' }}>
                 <QuoteGenerator />
+            </div>
+            <div style={{ position: 'fixed', top: '85px', left: '280px' }}>
+                <DoughnutChart completedTasks={completedTasks} tasks={tasks} />
             </div>
 
             <div className="todo-container">
@@ -172,6 +158,7 @@ const ToDoList = () => {
                                                 className="complete-button"
                                                 onClick={() => handleCompleteTask(index)}
                                                 aria-label="Complete"
+                                                disabled={isEditing}
                                             />
                                             <Button
                                                 style={{ backgroundColor: 'var(--surface-500)', color: 'var(--primary-color-text)' }}
