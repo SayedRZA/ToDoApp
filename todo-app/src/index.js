@@ -6,6 +6,7 @@ import "primereact/resources/themes/lara-light-indigo/theme.css"; // Choose your
 import "primereact/resources/primereact.min.css"; // Core CSS
 import "primeicons/primeicons.css"; // Icons
 import "primeflex/primeflex.css";
+import 'chart.js/auto';
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
